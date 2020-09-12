@@ -8,7 +8,12 @@
 $(document).ready(function() {
     //init();
 
-var now = moment().format("dddd Do MMMM, YYYY, H:mm");
-$('#currentDateTime').append(now);
+function setCurrentDateTime() {
+    var now = moment().format("dddd Do MMMM, YYYY, H:mm");
+    $('#currentDateTime').html(now);
+    setInterval(setCurrentDateTime, 1000);
+};
+
+setCurrentDateTime ();
 
 });
