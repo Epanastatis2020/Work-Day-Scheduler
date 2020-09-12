@@ -12,3 +12,22 @@ body {
     padding-top: 10px;
     padding-bottom: 10px;
   }
+
+.fa-save {
+    color: whitesmoke;
+}
+
+td {
+    width: 100%;
+}
+
+.event-input-div {
+    padding: 0px !important;
+}
+
+.event-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: whitesmoke;
+}
