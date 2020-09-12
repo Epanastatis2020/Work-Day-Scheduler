@@ -1,0 +1,14 @@
+/* Background image (free use) */
+body {
+    background-image: url('../images/background.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+/* Footer styling*/
+#footer-container {
+    background-color: #343a40;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }

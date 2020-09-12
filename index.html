@@ -8,27 +8,56 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
+    <!-- FontAwesome-->
+    <script src="https://kit.fontawesome.com/a1479b3c07.js" crossorigin="anonymous"></script>
+
+    <!-- Local CSS-->
+    <link rel="stylesheet" href="assets/css/style.css">
+
     <title>Work Day Planner</title>
   </head>
   <body>
     
-    <header>
-
+    <header class="jumbotron jumbotron-fluid mb-0">
+        <div class="container">
+            <h1 class="display-4">Fluid jumbotron</h1>
+            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+        </div>
     </header>
 
-    <div class="jumbotron">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Previous Day</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Current Day <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Next Day</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="button">Clear</button>
+          </form>
+        </div>
+    </nav>
 
-    </div>
-
-    <section class="container">
+    <section class="container mb-5 mt-5">
 
         <div class="table-responsive">
 
-            <table class="table">
+            <table class="table table-dark">
 
                 <tbody id="planner">
                     <tr id="0900">
-                        <th scope="row">09:00</th>
+                        <th scope="row" class="align-middle">09:00</th>
                         <td class="event-input-div">
                             <textarea class="event-input">
 
@@ -45,7 +74,7 @@
 
                     </tr>
                     <tr id="1000">
-                        <th scope="row">10:00</th>
+                        <th scope="row" class="align-middle">10:00</th>
                         <td class="event-input-div">
                             <textarea class="event-input">
 
@@ -62,7 +91,7 @@
 
                     </tr>
                     <tr id="1100">
-                        <th scope="row">11:00</th>
+                        <th scope="row" class="align-middle">11:00</th>
                         <td class="event-input-div">
                             <textarea class="event-input">
 
@@ -79,7 +108,7 @@
 
                     </tr>
                     <tr id="1200">
-                        <th scope="row">12:00</th>
+                        <th scope="row" class="align-middle">12:00</th>
                         <td class="event-input-div">
                             <textarea class="event-input">
 
@@ -96,7 +125,7 @@
 
                     </tr>
                     <tr id="1300">
-                        <th scope="row">13:00</th>
+                        <th scope="row" class="align-middle">13:00</th>
                         <td class="event-input-div">
                             <textarea class="event-input">
 
@@ -113,7 +142,7 @@
 
                     </tr>
                     <tr id="1400">
-                        <th scope="row">14:00</th>
+                        <th scope="row" class="align-middle">14:00</th>
                         <td class="event-input-div">
                             <textarea class="event-input">
 
@@ -130,7 +159,7 @@
 
                     </tr>
                     <tr id="1500">
-                        <th scope="row">15:00</th>
+                        <th scope="row" class="align-middle">15:00</th>
                         <td class="event-input-div">
                             <textarea class="event-input">
 
@@ -147,7 +176,7 @@
 
                     </tr>
                     <tr id="1600">
-                        <th scope="row">16:00</th>
+                        <th scope="row" class="align-middle">16:00</th>
                         <td class="event-input-div">
                             <textarea class="event-input">
 
@@ -164,7 +193,7 @@
 
                     </tr>
                     <tr id="1700">
-                        <th scope="row">17:00</th>
+                        <th scope="row" class="align-middle">17:00</th>
                         <td class="event-input-div">
                             <textarea class="event-input">
 
@@ -193,11 +222,19 @@
 
     </section>
 
-    <footer>
 
-    </footer>
+<footer class="footer mt-auto py-3 fixed-bottom">
+
+    <div class="container.fluid fixed-bottom" id="footer-container">
+
+        <span class="text-muted">© 2020, Con Angelakis <a href="https://github.com/Epanastatis2020" target="_blank"><i class="fab fa-github"></i></a></span>
+
+    </div>
+
+</footer>
 
     <!-- Optional JavaScript -->
+    <script src="assets/js/script.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
