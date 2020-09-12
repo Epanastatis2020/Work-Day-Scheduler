@@ -13,10 +13,16 @@ body {
     padding-bottom: 10px;
   }
 
+/* Icon styling */
 .fa-save {
     color: whitesmoke;
 }
 
+.fa-trash {
+    color: whitesmoke;
+}
+
+/* Table styling */
 td {
     width: 100%;
 }
