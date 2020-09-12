@@ -11,11 +11,11 @@ $(document).ready(function() {
 // This function sets the current date/time on the jumbatron
 function setCurrentDateTime() {
     var now = moment().format("dddd Do MMMM, YYYY, H:mm");
-    $('#currentDateTime').html(now);
+    $('#displayDateTime').html(now);
     setInterval(setCurrentDateTime, 1000);
 };
 
-setCurrentDateTime ();
+
 
 // This function determines which time slots are accessible for input
 function checkTimeSlot() {
@@ -54,5 +54,6 @@ function nextTimeSlots() {
     //Add code to change jumbatron sub-heading to show next date instead of current
 }
 
+setCurrentDateTime ();
 
 });
