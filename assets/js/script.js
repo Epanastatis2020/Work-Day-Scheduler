@@ -1,6 +1,3 @@
-// for future times, change row (tr) class to "bg-info"
-// for current time, change row (tr) class to "bg-primary"
-
 //IDs & Classes I might need to use
 // #displayDateTime
 // #displayDifferentDate
@@ -14,9 +11,13 @@
 
 //Declaring global variables
 
-    //This is what date and time is displayed in the jumbotron
-    var displayDate;
-
+    //This is the global current date/time variable
+    let displayDate;
+    //These are variables for the buttons
+    let currentBtnEl = $("#currentBtn")[0];
+    let previousBtnEl = $("#previousBtn")[0];
+    let nextBtnEl = $("#nextBtn")[0];
+    let clearBtnEl = $("#clearBtn")[0];
 
 
 $(document).ready(function() {
@@ -25,6 +26,11 @@ $(document).ready(function() {
     setCurrentDateTime();
     setJumbatron();
     populateTable();
+
+    //Event listeners
+    $("tr").click(handleClick);
+
+});
 
 // This function sets the current date/time
 function setCurrentDateTime() {
@@ -40,15 +46,16 @@ function setJumbatron() {
     setInterval(setCurrentDateTime, 1000);
 }
 
-// This function determines which time slots are accessible for input
-function checkTimeSlot() {
-    moment("id string", "HHmm");
-}
-
 // This function is what happens when the "save" button is clicked
-function saveTimeSlot () {
-    //Add code to save input text to local storage referencing time and date
-}
+function handleClick (event) {
+    let jqueryEvent = $(event.target);
+    if (jqueryEvent.hasClass("fa-save")) {
+        saveTimeSlot(event);
+    }
+    else if (jqueryEvent.hasClass("fa-trash")) {
+        deleteTimeSlot(event);
+    }
+};
 
 // This function is what happens when the "delete" button is clicked
 // function deleteTimeSlot (event) {
@@ -92,8 +99,8 @@ function populateTable() {
         let newTr = $("<tr>").attr("id", idVal);
         let newTh = $("<th>").attr("scope", "row").attr("class", "align-middle").text(hourDateVal.format("HH:[00]"));
         let newTd1 =$("<td>").attr("class", "event-input-div align-middle");
-        let newTextArea = $("<textarea>").attr("class", "event-input align-middle");
         let newTd2 = $("<td>").attr("id", idSaveVal);
+        let newTextArea
         let saveBtn = $("<button>").attr("type", "button").attr("class", "btn align-middle saveButton")
         let saveIcon = $("<i>").attr("class", "far fa-save fa-2x");
         let newTd3 = $("<td>").attr("id", idDelVal);
@@ -102,9 +109,11 @@ function populateTable() {
         //If statement checking for valid time window
         if (hourDateVal.isSame(displayDate, "hour")) {
             newTr.attr("class", "bg-primary")
+            newTextArea = $("<textarea>").attr("class", "event-input align-middle")
         }
         else if (hourDateVal.isAfter(displayDate)) {
             newTr.attr("class", "bg-info")
+            newTextArea = $("<textarea>").attr("class", "event-input align-middle")
         }
         else {
             newTr.attr("class", "")
@@ -123,4 +132,3 @@ function populateTable() {
     }
 }
 
-});
