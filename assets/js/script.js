@@ -24,6 +24,7 @@ $(document).ready(function() {
     //This is where all the functions should be called
     setCurrentDateTime();
     setJumbatron();
+    populateTable();
 
 // This function sets the current date/time
 function setCurrentDateTime() {
@@ -81,14 +82,12 @@ function nextTimeSlots() {
 
 //This loop creates the table and elements 
 function populateTable() {
-    for (let hour = 09; hour < 18; hour ++) {
+    for (let hour = 09; hour < 22; hour ++) {
         //creating the variables for the function
         let hourDateVal = moment(displayDate).hour(hour).minute(0);
         let idVal = hourDateVal.format("YYYY-MM-DD HH:[00]");
         let idSaveVal = hour + "save"
         let idDelVal = hour + "delete"
-        console.log(idVal);
-        debugger;
         //creating the table rows and content
         let newTr = $("<tr>").attr("id", idVal);
         let newTh = $("<th>").attr("scope", "row").attr("class", "align-middle").text(hourDateVal.format("HH:[00]"));
@@ -100,6 +99,16 @@ function populateTable() {
         let newTd3 = $("<td>").attr("id", idDelVal);
         let deleteBtn = $("<button>").attr("type", "button").attr("class", "btn align-middle deleteButton")
         let deleteIcon = $("<i>").attr("class", "fas fa-trash fa-2x");
+        //If statement checking for valid time window
+        if (hourDateVal.isSame(displayDate, "hour")) {
+            newTr.attr("class", "bg-primary")
+        }
+        else if (hourDateVal.isAfter(displayDate)) {
+            newTr.attr("class", "bg-info")
+        }
+        else {
+            newTr.attr("class", "")
+        };
         //appending the created elements
         $("#planner").append(newTr);
         newTr.append(newTh);
@@ -113,7 +122,5 @@ function populateTable() {
         deleteBtn.append(deleteIcon);
     }
 }
-
-populateTable();
 
 });
