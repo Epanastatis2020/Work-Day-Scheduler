@@ -1,12 +1,25 @@
 // for future times, change row (tr) class to "bg-info"
 // for current time, change row (tr) class to "bg-primary"
 
+//IDs & Classes I might need to use
+// #displayDateTime
+// #displayDifferentDate
+// #previousBtn
+// #currentBtn
+// #nextBtn
+// #clearBtn
+// .saveButton
+// .deleteButton
+
+
 //Declaring global variables
-
-
+var currentDate;
 
 $(document).ready(function() {
     //init();
+    //This is where all the functions should be called
+    saveCurrentDate();
+    setCurrentDateTime();
 
 // This function sets the current date/time on the jumbatron
 function setCurrentDateTime() {
@@ -15,7 +28,12 @@ function setCurrentDateTime() {
     setInterval(setCurrentDateTime, 1000);
 };
 
-
+// This function saves the current date & time
+function saveCurrentDate() {
+    let now = moment();
+    currentDate = now.clone().format("DD MM YYYY, HH:mm");
+    console.log(currentDate);
+}
 
 // This function determines which time slots are accessible for input
 function checkTimeSlot() {
@@ -53,7 +71,5 @@ function nextTimeSlots() {
     //Add code to update table with next day's locally stored values
     //Add code to change jumbatron sub-heading to show next date instead of current
 }
-
-setCurrentDateTime ();
 
 });
