@@ -13,7 +13,13 @@
 
 
 //Declaring global variables
-var currentDate;
+
+    //This keeps track of the current date and time
+    var currentDate;
+    //This is what date and time is displayed in the jumbotron
+    var displayDate;
+
+
 
 $(document).ready(function() {
     //init();
@@ -23,8 +29,9 @@ $(document).ready(function() {
 
 // This function sets the current date/time on the jumbatron
 function setCurrentDateTime() {
-    var now = moment().format("dddd Do MMMM, YYYY, H:mm");
-    $('#displayDateTime').html(now);
+    var now = moment();
+    displayDate = now.clone().format("dddd Do MMMM, YYYY, H:mm");
+    $('#displayDateTime').html(displayDate);
     setInterval(setCurrentDateTime, 1000);
 };
 
@@ -32,12 +39,11 @@ function setCurrentDateTime() {
 function saveCurrentDate() {
     let now = moment();
     currentDate = now.clone().format("DD MM YYYY, HH:mm");
-    console.log(currentDate);
 }
 
 // This function determines which time slots are accessible for input
 function checkTimeSlot() {
-
+    moment("id string", "HHmm");
 }
 
 // This function is what happens when the "save" button is clicked
@@ -71,5 +77,41 @@ function nextTimeSlots() {
     //Add code to update table with next day's locally stored values
     //Add code to change jumbatron sub-heading to show next date instead of current
 }
+
+//This loop creates the table and elements 
+function populateTable() {
+    for (let hour = 09; hour < 18; hour ++) {
+        //creating the variables for the function
+        let hourDateVal = moment(displayDate).hour(hour).minute(0);
+        let idVal = hourDateVal.format("YYYY-MM-DD HH:[00]");
+        let idSaveVal = hour + "save"
+        let idDelVal = hour + "delete"
+        console.log(idVal);
+        //creating the table rows and content
+        let newTr = $("<tr>").attr("id", idVal);
+        let newTh = $("<th>").attr("scope", "row").attr("class", "align-middle").text(hourDateVal.hour(hour));
+        let newTd1 =$("<td>").attr("class", "event-input-div align-middle");
+        let newTextArea = $("<textarea>").attr("class", "event-input align-middle");
+        let newTd2 = $("<td>").attr("id", idSaveVal);
+        let saveBtn = $("<button>").attr("type", "button").attr("class", "btn align-middle saveButton")
+        let saveIcon = $("<i>").attr("class", "far fa-save fa-2x");
+        let newTd3 = $("<td>").attr("id", idDelVal);
+        let deleteBtn = $("<button>").attr("type", "button").attr("class", "btn align-middle deleteButton")
+        let deleteIcon = $("<i>").attr("class", "fas fa-trash fa-2x");
+        //appending the created elements
+        $("#planner").append(newTr);
+        newTr.append(newTh);
+        newTr.append(newTd1);
+        newTd1.append(newTextArea);
+        newTr.append(newTd2);
+        newTd2.append(saveBtn);
+        saveBtn.append(saveIcon);
+        newTr.append(newTd3);
+        newTd3.append(deleteBtn);
+        deleteBtn.append(deleteIcon);
+    }
+}
+
+populateTable();
 
 });
