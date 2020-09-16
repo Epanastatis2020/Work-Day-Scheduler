@@ -14,8 +14,6 @@
 
 //Declaring global variables
 
-    //This keeps track of the current date and time
-    var currentDate;
     //This is what date and time is displayed in the jumbotron
     var displayDate;
 
@@ -24,21 +22,21 @@
 $(document).ready(function() {
     //init();
     //This is where all the functions should be called
-    saveCurrentDate();
     setCurrentDateTime();
+    setJumbatron();
 
-// This function sets the current date/time on the jumbatron
+// This function sets the current date/time
 function setCurrentDateTime() {
     var now = moment();
-    displayDate = now.clone().format("dddd Do MMMM, YYYY, H:mm");
-    $('#displayDateTime').html(displayDate);
+    displayDate = now.clone();
     setInterval(setCurrentDateTime, 1000);
 };
 
-// This function saves the current date & time
-function saveCurrentDate() {
-    let now = moment();
-    currentDate = now.clone().format("DD MM YYYY, HH:mm");
+//This function updates the day/time on the jumabatron
+function setJumbatron() {
+    var jumbatronDate = displayDate.format("dddd Do MMMM YYYY, HH:mm");
+    $('#displayDateTime').html(jumbatronDate);
+    setInterval(setCurrentDateTime, 1000);
 }
 
 // This function determines which time slots are accessible for input
@@ -52,14 +50,17 @@ function saveTimeSlot () {
 }
 
 // This function is what happens when the "delete" button is clicked
-function deleteTimeSlot () {
-    //Add code to delete saved input text and date time from local storage
-}
+// function deleteTimeSlot (event) {
+//     event.preventDefault();
+//     localStorage.removeItem(//reference to specific row here)
+//     //specific row.textContent = "";
+// }
 
-// This function is what happens when the "clear" button is clicked
-function clearTimeSlots () {
-    //Add code to delete all local storage
-}
+// // This function is what happens when the "clear" button is clicked
+// function clearTimeSlots (event) {
+//     event.preventDefault();
+//     localStorage.clear();
+// }
 
 //This function is what happens when the "previous day" link is clicked
 function previousTimeSlots() {
@@ -87,9 +88,10 @@ function populateTable() {
         let idSaveVal = hour + "save"
         let idDelVal = hour + "delete"
         console.log(idVal);
+        debugger;
         //creating the table rows and content
         let newTr = $("<tr>").attr("id", idVal);
-        let newTh = $("<th>").attr("scope", "row").attr("class", "align-middle").text(hourDateVal.hour(hour));
+        let newTh = $("<th>").attr("scope", "row").attr("class", "align-middle").text(hourDateVal.format("HH:[00]"));
         let newTd1 =$("<td>").attr("class", "event-input-div align-middle");
         let newTextArea = $("<textarea>").attr("class", "event-input align-middle");
         let newTd2 = $("<td>").attr("id", idSaveVal);
