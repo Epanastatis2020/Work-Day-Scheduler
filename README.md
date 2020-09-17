@@ -32,8 +32,11 @@ I have also added individual and global delete functionality, so that users can 
 
 ## Screenshots
 
-![Image here](image url)
+![Calendar Home Page](https://user-images.githubusercontent.com/65388616/93438185-4cb5d780-f910-11ea-9391-cdba692d2a11.JPG)
 
+![Calendar Home Page](https://user-images.githubusercontent.com/65388616/93438259-66571f00-f910-11ea-8a1d-a4e7136884f9.JPG)
+
+![Calendar Home Page](https://user-images.githubusercontent.com/65388616/93438317-7969ef00-f910-11ea-8bf5-f2121ab0e126.JPG)
 
 
 ## Licence
