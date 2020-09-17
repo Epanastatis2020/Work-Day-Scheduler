@@ -57,6 +57,13 @@ function handleClick (event) {
     }
 };
 
+function saveTimeSlot (event) {
+    event.preventDefault();
+    debugger;
+    let newCalendarEvent = $(event.target).closest("tr" ,"textarea").val();
+    console.log(newCalendarEvent);    
+}
+
 // This function is what happens when the "delete" button is clicked
 // function deleteTimeSlot (event) {
 //     event.preventDefault();
