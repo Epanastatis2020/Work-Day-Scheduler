@@ -22,6 +22,14 @@
 
 $(document).ready(function() {
     init();
+});
+
+//initialiser
+function init() {
+    $("#planner").empty();
+    setCurrentDateTime();
+    setJumbatron();
+    populateTable();
 
     //Event listeners
     $("tr").click(handleClick);
@@ -29,14 +37,7 @@ $(document).ready(function() {
     $("#previousBtn").click(previousTimeSlots);
     $("#currentBtn").click(currentTimeSlots);
     $("#nextBtn").click(nextTimeSlots);
-
-    function init() {
-        setCurrentDateTime();
-        setJumbatron();
-        populateTable();
-    }
-
-});
+}
 
 // This function sets the current date/time
 function setCurrentDateTime() {
@@ -81,7 +82,7 @@ function saveTimeSlot (event) {
     }
     calendar.push(newCalendarEntry);
     localStorage.setItem("calendar", JSON.stringify(calendar));
-    location.reload();
+    init();
 }
 
 // This function deletes the calendar event
@@ -97,13 +98,13 @@ function deleteTimeSlot (event) {
     let indexPosition = calendar.indexOf(foundID);
     calendar.splice(indexPosition, 1);
     localStorage.setItem("calendar", JSON.stringify(calendar));
-    location.reload();
+    init();
  }
 
 // This function updates the content in the table with saved data
 
 function updateTable () {
-    
+
 }
 
 // This function is what happens when the "clear" button is clicked
@@ -117,17 +118,19 @@ function clearTimeSlots (event) {
 function previousTimeSlots() {
     //Add code to update table with previous day's locally stored values
     //Add code to change jumbatron sub-heading to show previous date instead of current
+    //I ran out of time to do this
 }
 
 //This function is what happens when the "current day" link is clicked
 function currentTimeSlots() {
-    //Re-initialise
+    init();
 }
 
 //This function is what happens when the "next day" link is clicked
 function nextTimeSlots() {
     //Add code to update table with next day's locally stored values
     //Add code to change jumbatron sub-heading to show next date instead of current
+    //I ran out of time to do this
 }
 
 //This loop creates the table and elements 
