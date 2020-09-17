@@ -81,7 +81,7 @@ function saveTimeSlot (event) {
     }
     calendar.push(newCalendarEntry);
     localStorage.setItem("calendar", JSON.stringify(calendar));
-    init ();
+    location.reload();
 }
 
 // This function deletes the calendar event
@@ -97,8 +97,14 @@ function deleteTimeSlot (event) {
     let indexPosition = calendar.indexOf(foundID);
     calendar.splice(indexPosition, 1);
     localStorage.setItem("calendar", JSON.stringify(calendar));
-    init();
+    location.reload();
  }
+
+// This function updates the content in the table with saved data
+
+function updateTable () {
+    
+}
 
 // This function is what happens when the "clear" button is clicked
 function clearTimeSlots (event) {
