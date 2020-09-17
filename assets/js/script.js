@@ -21,11 +21,7 @@
 
 
 $(document).ready(function() {
-    //init();
-    //This is where all the functions should be called
-    setCurrentDateTime();
-    setJumbatron();
-    populateTable();
+    init();
 
     //Event listeners
     $("tr").click(handleClick);
@@ -33,6 +29,12 @@ $(document).ready(function() {
     $("#previousBtn").click(previousTimeSlots);
     $("#currentBtn").click(currentTimeSlots);
     $("#nextBtn").click(nextTimeSlots);
+
+    function init() {
+        setCurrentDateTime();
+        setJumbatron();
+        populateTable();
+    }
 
 });
 
@@ -79,14 +81,24 @@ function saveTimeSlot (event) {
     }
     calendar.push(newCalendarEntry);
     localStorage.setItem("calendar", JSON.stringify(calendar));
+    init ();
 }
 
 // This function deletes the calendar event
-// function deleteTimeSlot (event) {
-//     event.preventDefault();
-//     localStorage.removeItem(//reference to specific row here)
-//     //specific row.textContent = "";
-// }
+function deleteTimeSlot (event) {
+    event.preventDefault();
+    calendar = JSON.parse(window.localStorage.getItem('calendar'));
+    rowIDToBeDeleted = $(event.target).closest("tr").attr("id");
+    let foundID = calendar.find(function(calendarEntry) {
+        if (calendarEntry.Timeslot === rowIDToBeDeleted) {
+            return true;
+        }
+    });
+    let indexPosition = calendar.indexOf(foundID);
+    calendar.splice(indexPosition, 1);
+    localStorage.setItem("calendar", JSON.stringify(calendar));
+    init();
+ }
 
 // This function is what happens when the "clear" button is clicked
 function clearTimeSlots (event) {
@@ -120,6 +132,7 @@ function populateTable() {
         let idVal = hourDateVal.format("YYYY-MM-DD HH:[00]");
         let idSaveVal = hour + "save"
         let idDelVal = hour + "delete"
+        let idDelVal2 = `${hour}delete`
         //creating the table rows and content
         let newTr = $("<tr>").attr("id", idVal);
         let newTh = $("<th>").attr("scope", "row").attr("class", "align-middle").text(hourDateVal.format("HH:[00]"));
@@ -144,6 +157,13 @@ function populateTable() {
             newTr.attr("class", "")
             newTextArea = $("<textarea readonly>").attr("class", "event-input align-middle")
         };
+        // fill table with any saved values
+        let calendarContent = JSON.parse(localStorage.getItem('calendar'));
+        for (var i = 0; i < calendarContent.length; i++) {
+            if (calendarContent[i].Timeslot == idVal) {
+                newTextArea.text(calendarContent[i].Entry)
+            }
+        }   
         //appending the created elements
         $("#planner").append(newTr);
         newTr.append(newTh);
@@ -157,4 +177,3 @@ function populateTable() {
         deleteBtn.append(deleteIcon);
     }
 }
-
