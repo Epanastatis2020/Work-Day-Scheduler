@@ -4,15 +4,15 @@
 // #previousBtn
 // #currentBtn
 // #nextBtn
-// #clearBtn
-// .saveButton
-// .deleteButton
+
 
 
 //Declaring global variables
 
     //This is the global current date/time variable
     let displayDate;
+    //This is the stored calendar variable
+    let calendar;
     //These are variables for the buttons
     let currentBtnEl = $("#currentBtn")[0];
     let previousBtnEl = $("#previousBtn")[0];
@@ -29,6 +29,10 @@ $(document).ready(function() {
 
     //Event listeners
     $("tr").click(handleClick);
+    $("#clearBtn").click(clearTimeSlots);
+    $("#previousBtn").click(previousTimeSlots);
+    $("#currentBtn").click(currentTimeSlots);
+    $("#nextBtn").click(nextTimeSlots);
 
 });
 
@@ -41,12 +45,12 @@ function setCurrentDateTime() {
 
 //This function updates the day/time on the jumabatron
 function setJumbatron() {
-    var jumbatronDate = displayDate.format("dddd Do MMMM YYYY, HH:mm");
+    var jumbatronDate = moment().format("dddd Do MMMM YYYY, HH:mm");
     $('#displayDateTime').html(jumbatronDate);
-    setInterval(setCurrentDateTime, 1000);
+    setInterval(setJumbatron, 1000);
 }
 
-// This function is what happens when the "save" button is clicked
+// This function is what happens when either "save" or "delete" buttons are clicked
 function handleClick (event) {
     let jqueryEvent = $(event.target);
     if (jqueryEvent.hasClass("fa-save")) {
@@ -57,25 +61,39 @@ function handleClick (event) {
     }
 };
 
+// This function saves the calendar event
 function saveTimeSlot (event) {
     event.preventDefault();
-    debugger;
-    let newCalendarEvent = $(event.target).closest("tr" ,"textarea").val();
-    console.log(newCalendarEvent);    
+    let newCalendarEvent = $(event.target).closest("tr").find("textarea").val();
+    let newCalendarEventTime = $(event.target).closest("tr").attr("id");
+    if (newCalendarEvent === "") {
+        return;
+    }
+    let newCalendarEntry = {
+        Entry: newCalendarEvent,
+        Timeslot: newCalendarEventTime
+    };
+    calendar = JSON.parse(window.localStorage.getItem('calendar'));
+    if (calendar === null) {
+        calendar = [];
+    }
+    calendar.push(newCalendarEntry);
+    localStorage.setItem("calendar", JSON.stringify(calendar));
 }
 
-// This function is what happens when the "delete" button is clicked
+// This function deletes the calendar event
 // function deleteTimeSlot (event) {
 //     event.preventDefault();
 //     localStorage.removeItem(//reference to specific row here)
 //     //specific row.textContent = "";
 // }
 
-// // This function is what happens when the "clear" button is clicked
-// function clearTimeSlots (event) {
-//     event.preventDefault();
-//     localStorage.clear();
-// }
+// This function is what happens when the "clear" button is clicked
+function clearTimeSlots (event) {
+    debugger;
+     event.preventDefault();
+     window.localStorage.clear();
+ }
 
 //This function is what happens when the "previous day" link is clicked
 function previousTimeSlots() {
@@ -124,6 +142,7 @@ function populateTable() {
         }
         else {
             newTr.attr("class", "")
+            newTextArea = $("<textarea readonly>").attr("class", "event-input align-middle")
         };
         //appending the created elements
         $("#planner").append(newTr);
