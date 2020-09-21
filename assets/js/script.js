@@ -1,12 +1,3 @@
-//IDs & Classes I might need to use
-// #displayDateTime
-// #displayDifferentDate
-// #previousBtn
-// #currentBtn
-// #nextBtn
-
-
-
 //Declaring global variables
 
     //This is the global current date/time variable
@@ -135,7 +126,7 @@ function nextTimeSlots() {
 
 //This loop creates the table and elements 
 function populateTable() {
-    for (let hour = 09; hour < 22; hour ++) {
+    for (let hour = 09; hour < 18; hour ++) {
         //creating the variables for the function
         let hourDateVal = moment(displayDate).hour(hour).minute(0);
         let idVal = hourDateVal.format("YYYY-MM-DD HH:[00]");
