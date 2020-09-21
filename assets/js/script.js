@@ -28,6 +28,7 @@ function init() {
     $("#previousBtn").click(previousTimeSlots);
     $("#currentBtn").click(currentTimeSlots);
     $("#nextBtn").click(nextTimeSlots);
+
 }
 
 // This function sets the current date/time
@@ -159,6 +160,9 @@ function populateTable() {
         };
         // fill table with any saved values
         let calendarContent = JSON.parse(localStorage.getItem('calendar'));
+        if (!calendarContent) {
+            calendarContent = [];
+        }
         for (var i = 0; i < calendarContent.length; i++) {
             if (calendarContent[i].Timeslot == idVal) {
                 newTextArea.text(calendarContent[i].Entry)
